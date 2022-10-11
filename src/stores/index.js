@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from "axios"
+// import { Bar } from 'vue-chartjs'
 
-// let clientKey = `SB-Mid-client-jgPpUBjZXarlGCpk`
 
 let baseURL = "http://localhost:3000/"
 

@@ -1,11 +1,15 @@
 <script>
 import { mapActions, mapState } from 'pinia';
 import { useIndexStore } from '../stores/index';
-
+import Chart from '../components/Chart.vue'
 
 
 export default {
   name: `Home`,
+
+  components: {
+    Chart
+  },
 
   computed: {
     ...mapState(useIndexStore, [`expenses`])
@@ -27,6 +31,8 @@ export default {
   <div class="container">
     <h1 class="mb-5 mt-5">Welcome to Xpense</h1>
     <button @click.prevent="this.payments()" id="pay-button" class="btn btn-primary">Buy Premium account</button>
+
+    <Chart />
 
 
     <!-- <div class="">
