@@ -16,9 +16,8 @@ export default {
 
 <template>
 
-  <h1>pay</h1>
+  <h1>Home</h1>
 
-  <button @click.prevent="this.payments()"
-   id="pay-button" class="btn btn-primary">Buy Premium account</button>
+  <button @click.prevent="this.payments()" id="pay-button" class="btn btn-primary">Buy Premium account</button>
 
 </template>
