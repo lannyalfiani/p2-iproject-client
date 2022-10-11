@@ -28,8 +28,9 @@ export default {
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
                 <div class="navbar-brand">
-                    <img src="https://yt3.ggpht.com/ytc/AMLnZu_Y_jCSjP7C_XemvkfWHR6ubejWiSDWUSYMpOPc=s900-c-k-c0x00ffffff-no-rj"
-                        alt="Logo" width="35" height="35" class="d-inline-block align-text-top object-cover">
+                    <!-- <img src="https://yt3.ggpht.com/ytc/AMLnZu_Y_jCSjP7C_XemvkfWHR6ubejWiSDWUSYMpOPc=s900-c-k-c0x00ffffff-no-rj"
+                        alt="Logo" width="35" height="35" class="d-inline-block align-text-top object-cover"> -->
+                        <img src="../assets/logo3.png" height="50" alt="">
                 </div>
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarText">

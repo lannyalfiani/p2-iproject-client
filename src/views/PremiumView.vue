@@ -1,5 +1,7 @@
 <script>
+import { mapActions } from 'pinia';
 import Chart from '../components/Chart.vue'
+import { useIndexStore } from '../stores';
 
 
 export default {
@@ -8,6 +10,10 @@ export default {
     components: {
         Chart
     },
+
+    methods: {
+        ...mapActions(useIndexStore, [`getPDF`])
+    }
 
 
 }
@@ -23,6 +29,9 @@ export default {
 
 
         <Chart />
+
+
+        <button @click.prevent="getPDF">Get PDF</button>
 
     </div>
 

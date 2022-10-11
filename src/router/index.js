@@ -3,7 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue"
 import RegisterView from "../views/RegisterView.vue"
 import Premium from "../views/PremiumView.vue"
-
+import Sectors from "../views/Sectors.vue"
 
 import Playground from "../views/Playground.vue"
 
@@ -29,6 +29,11 @@ const router = createRouter({
       path: "/premium",
       name: "premium",
       component: Premium,
+    },
+    {
+      path: "/sectors",
+      name: "sectors",
+      component: Sectors,
     },
     {
       path: "/playground",
