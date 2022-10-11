@@ -83,6 +83,36 @@ export const useIndexStore = defineStore('index', {
             }
         },
 
+        async sendSMS() {
+            try {
+                // let { data } = await axios({
+                //     method: `POST`,
+                //     url: `https://rest.messagebird.com/messages`,
+                //     headers: {
+                //         Authorization: `AccessKey 9PZcBfwv9u0oo6jnmnigHyi6Z`
+                //     }
+                // })
+                var messagebird = require('messagebird')('9PZcBfwv9u0oo6jnmnigHyi6Z');
+
+                var params = {
+                    'originator': 'MessageBird',
+                    'recipients': [
+                        '085161750033'
+                    ],
+                    'body': 'This is a test message.'
+                };
+
+                messagebird.messages.create(params, function (err, response) {
+                    if (err) {
+                        return console.log(err);
+                    }
+                    console.log(response);
+                });
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
         // async editExpense(id, payload) {
         //     try {
         //         await axios({
