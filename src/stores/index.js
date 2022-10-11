@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from "axios"
+// import { Bar } from 'vue-chartjs'
 
-// let clientKey = `SB-Mid-client-jgPpUBjZXarlGCpk`
 
 let baseURL = "http://localhost:3000/"
 
@@ -79,6 +79,36 @@ export const useIndexStore = defineStore('index', {
                 // console.log(data);
             } catch (err) {
                 // console.log(err);
+                console.log(err);
+            }
+        },
+
+        async sendSMS() {
+            try {
+                // let { data } = await axios({
+                //     method: `POST`,
+                //     url: `https://rest.messagebird.com/messages`,
+                //     headers: {
+                //         Authorization: `AccessKey 9PZcBfwv9u0oo6jnmnigHyi6Z`
+                //     }
+                // })
+                var messagebird = require('messagebird')('9PZcBfwv9u0oo6jnmnigHyi6Z');
+
+                var params = {
+                    'originator': 'MessageBird',
+                    'recipients': [
+                        '085161750033'
+                    ],
+                    'body': 'This is a test message.'
+                };
+
+                messagebird.messages.create(params, function (err, response) {
+                    if (err) {
+                        return console.log(err);
+                    }
+                    console.log(response);
+                });
+            } catch (err) {
                 console.log(err);
             }
         },
