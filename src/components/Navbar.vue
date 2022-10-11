@@ -1,4 +1,7 @@
 <script>
+import { mapState } from 'pinia';
+import { useIndexStore } from '../stores';
+
 
 
 export default {
@@ -8,6 +11,11 @@ export default {
         return {
             status: localStorage.getItem(`status`)
         }
+    },
+
+
+    computed: {
+        ...mapState(useIndexStore, [`isLoggedIn`])
     }
 }
 
@@ -27,15 +35,16 @@ export default {
                 <div class="collapse navbar-collapse justify-content-end" id="navbarText">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Home</a>
+                            <a @click.prevent="this.$router.push(`/`)" class="nav-link" aria-current="page"
+                                href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Premium Area</a>
+                            <a @click.prevent="this.$router.push(`/premium`)" class="nav-link" href="#">Premium Area</a>
                         </li>
-                        <li class="nav-item">
+                        <li v-if="isLoggedIn" class="nav-item">
                             <a class="nav-link" href="#">Login</a>
                         </li>
-                        <li class="nav-item">
+                        <li v-if="isLoggedIn" class="nav-item">
                             <a class="nav-link" href="#">Register</a>
                         </li>
                         <li class="nav-item">

@@ -41,16 +41,21 @@ export default {
 //         }
 //     }
 // });
+
 </script>
 
 
 <template>
 
-    <h1>chart</h1>
+    <div class="container border-1 bg-light mt-5">
+        <h4>Nanti chart</h4>
 
-    <div style="width: 500px;height: 500px">
-        <canvas id="myChart"></canvas>
+        <div style="width: 500px;height: 500px">
+            <canvas id="myChart"></canvas>
+        </div>
     </div>
+
+
 
 
 
