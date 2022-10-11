@@ -2,7 +2,6 @@ import { defineStore } from 'pinia'
 import axios from "axios"
 // import { Bar } from 'vue-chartjs'
 
-
 let baseURL = "http://localhost:3000/"
 
 export const useIndexStore = defineStore('index', {
@@ -11,7 +10,9 @@ export const useIndexStore = defineStore('index', {
             isLoggedIn: false,
             expenses: [],
             categories: [],
-            paymentResponse: {}
+            paymentResponse: {},
+            PDF: {},
+            sectors: []
         }
     },
 
@@ -123,8 +124,6 @@ export const useIndexStore = defineStore('index', {
             }
         },
 
-
-
         async sendSMS() {
             try {
                 // let { data } = await axios({
@@ -210,7 +209,37 @@ export const useIndexStore = defineStore('index', {
             } catch (err) {
                 console.log(err);
             }
+        },
+
+        async getPDF() {
+            try {
+                let { data } = await axios({
+                    method: `GET`,
+                    url: baseURL + `reports`,
+                    headers: {
+                        access_token: localStorage.getItem(`access_token`)
+                    }
+                })
+                this.PDF = data
+                console.log(data);
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+        async fetchSectors() {
+            try {
+                let { data } = await axios({
+                    method: `GET`,
+                    url: `https://indonesia-stock-exchange.vercel.app/api/sectors`
+                })
+                this.sectors = data.data
+            } catch (err) {
+                console.log(err);
+            }
         }
+
+
 
 
 
