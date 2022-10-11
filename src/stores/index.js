@@ -78,6 +78,7 @@ export const useIndexStore = defineStore('index', {
                 this.expenses = data
                 // console.log(data);
             } catch (err) {
+                // console.log(err);
                 console.log(err);
             }
         },
