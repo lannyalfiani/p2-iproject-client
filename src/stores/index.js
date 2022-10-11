@@ -10,6 +10,7 @@ export const useIndexStore = defineStore('index', {
         return {
             isLoggedIn: false,
             expenses: [],
+            categories: [],
             paymentResponse: {}
         }
     },
@@ -82,6 +83,47 @@ export const useIndexStore = defineStore('index', {
                 console.log(err);
             }
         },
+
+        async fetchCategories() {
+            try {
+                let { data } = await axios({
+                    method: `GET`,
+                    url: baseURL + `categories`,
+                    headers: {
+                        access_token: localStorage.getItem(`access_token`)
+                    }
+                })
+                this.categories = data
+                // console.log(data);
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+        async addExpense(payload) {
+            console.log(payload);
+            try {
+                let { data } = await axios({
+                    method: `POST`,
+                    url: baseURL + `expenses`,
+                    headers: {
+                        access_token: localStorage.getItem(`access_token`)
+                    },
+                    data: {
+                        name: payload.name,
+                        amount: payload.amount,
+                        date: payload.date,
+                        CategoryId: payload.CategoryId,
+                    }
+                })
+                // console.log(data);
+                this.fetchExpenses()
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+
 
         async sendSMS() {
             try {
@@ -169,6 +211,8 @@ export const useIndexStore = defineStore('index', {
                 console.log(err);
             }
         }
+
+
 
 
 
