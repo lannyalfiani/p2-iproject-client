@@ -44,4 +44,19 @@ const router = createRouter({
   ],
 });
 
+router.beforeEach((to, from) => {
+  if (!localStorage.getItem('access_token') && to.name === 'home') {
+    return { path: '/login' };
+  } else if (!localStorage.getItem('access_token') && to.name === 'premium') {
+    return { path: '/login' };
+  } else if (!localStorage.getItem('access_token') && to.name === 'extras') {
+    return { path: '/login' };
+
+  } else if (localStorage.getItem('access_token') && to.name === 'login') {
+    return { path: '/' };
+  } else if (localStorage.getItem('access_token') && to.name === 'register') {
+    return { path: '/' };
+  }
+})
+
 export default router;

@@ -13,7 +13,7 @@ export default {
                 amount: "",
                 date: "",
                 CategoryId: ""
-            }
+            },
         }
     },
 
@@ -26,17 +26,18 @@ export default {
 
         handleAddExpense() {
             this.addExpense(this.dataInput)
-        },
 
-        emptyForm() {
-            this.dataInput = {}
-        }
+            this.dataInput.name=""
+            this.dataInput.amount=""
+            this.dataInput.date=""
+            this.dataInput.CategoryId=""
+
+
+        },
     },
 
     created() {
-        this.fetchCategories(),
-
-            this.emptyForm()
+        this.fetchCategories()
     }
 }
 
@@ -47,40 +48,40 @@ export default {
 
     <div class="bg-light" id="Add-New-Expense">
 
-        <div class="container mt-3">
-            <h3 class="mb-5 border-1">Add new expense</h3>
+        <div class="container">
+            <h3 class="mb-5 pt-3 border-1">Add new expense</h3>
 
             <form @submit.prevent="handleAddExpense" class="row">
 
                 <div class="col-3 mb-2">
-                    <label for="expense-name">Expense Name</label>
-                    <input v-model="dataInput.name" type="text" class="form-control" id="expense-name"
+                    <label for="expense-name" class="mb-2">Expense Name</label>
+                    <input required v-model="dataInput.name" type="text" class="form-control " id="expense-name"
                         placeholder="Arisan">
                 </div>
 
 
-                <div class="col-3 mb-2">
-                    <label for="expense-amount">Amount</label>
-                    <input v-model="dataInput.amount" type="number" class="form-control" id="expense-amount"
+                <div class="col-2 mb-2">
+                    <label for="expense-amount" class="mb-2">Amount</label>
+                    <input min="100" required v-model="dataInput.amount" type="number" class="form-control" id="expense-amount"
                         placeholder="50000">
                 </div>
 
                 <div class="col-3 mb-2">
-                    <label for="expense-date">Date</label>
-                    <input v-model="dataInput.date" type="date" class="form-control" id="expense-date">
+                    <label for="expense-date" class="mb-2">Date</label>
+                    <input min="2010-01-01" required v-model="dataInput.date" type="date" class="form-control" id="expense-date" >
                 </div>
 
                 <div class="col-3 mb-2">
-                    <label for="expense-date">Category</label>
-                    <select v-model="dataInput.CategoryId" class="form-select" aria-label="Default select example">
+                    <label for="expense-date" class="mb-2">Category</label>
+                    <select required v-model="dataInput.CategoryId" class="form-select" aria-label="Default select example">
                         <option disabled selected value="">Select Category</option>
                         <option v-for="category in categories" :key="category.id" :value="category.id">{{category.name}}
                         </option>
                     </select>
                 </div>
 
-                <div class="col-3 d-flex align-items-end mb-2">
-                    <button class="btn btn-outline-primary" type="submit">Add</button>
+                <div class="col-1 d-flex align-items-end mb-2">
+                    <button class="btn btn-secondary" type="submit">Add</button>
                 </div>
 
             </form>

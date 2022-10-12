@@ -15,6 +15,24 @@ export default {
                 currency: "IDR",
             }).format(this.expense.amount);
         },
+
+        formatDate() {
+            return new Date(this.expense.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+                weekday: 'long' 
+                // hour: "2-digit",
+                // minute: "2-digit",
+                // second: "2-digit",
+        // let option = { weekday: 'long' , year: 'numeric' , month: 'long' , day: 'numeric' }
+                
+            })
+        }
+
+
+
+
     },
 
     methods: {
@@ -33,7 +51,9 @@ export default {
         <td class="text-center">{{index+1}}</td>
         <td>{{expense.name}}</td>
         <td>{{(toRupiah)}}</td>
-        <td>{{expense.date}}</td>
+        <!-- <td>{{expense.date}}</td> -->
+        <td>{{(formatDate)}}</td>
+
         <td>{{expense.Category.name}}</td>
         <td>
             <a @click.prevent="deleteExpense(expense.id)" href="">Delete</a>

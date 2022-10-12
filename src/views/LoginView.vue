@@ -39,15 +39,15 @@ export default {
                 <!-- Email -->
                 <div class="mb-3">
                     <label for="login-email" class="form-label">Email address</label>
-                    <input v-model="loginData.email" type="email" class="form-control" id="login-email"
+                    <input required v-model="loginData.email" type="email" class="form-control" id="login-email"
                         placeholder="name@example.com">
                 </div>
 
                 <!-- Password -->
                 <div class="mb-3">
                     <label for="login-password" class="form-label">Password</label>
-                    <input v-model="loginData.password" type="password" class="form-control" id="login-password"
-                        placeholder="r4h4s14">
+                    <input required v-model="loginData.password" type="password" class="form-control"
+                        id="login-password" placeholder="r4h4s14">
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
 

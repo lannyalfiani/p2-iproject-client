@@ -33,23 +33,9 @@ export default {
 <template>
 
     <div class="container mt-5">
-        <h1 class="mt-5 text-center">Premium Area</h1>
+        <h1 class="display-5 mt-5 mb-5 text-center">Premium Area</h1>
 
-
-        <div class="border 1px solid black">
-            <h4>Username: {{username}}</h4>
-            <h4>Status: {{status}}</h4>
-        </div>
-
-        <!-- nanti kasih v-if cuma muncul kalo statusnya regular -->
-        <h5 class="mt-5">Tired of boring table? Get premium account today</h5>
-
-        <!-- nanti kasih v-if cuma muncul kalo statusnya premium -->
-        <!-- Kalo udah deploy nanti ganti URL di action -->
-        <form class="mt-5" method="get" action="http://localhost:3000/reports?username=lanny&id=123">
-            <button class="btn btn-primary" type="submit">Download Invoice</button>
-        </form>
-
+        <!-- <p class="text text-center">Your priviledge of being a premium member, a beautiful chart:</p> -->
 
         <!-- nanti kasih v-if cuma muncul kalo statusnya premium -->
         <PieChart />
