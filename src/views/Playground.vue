@@ -1,10 +1,14 @@
 <script>
+import ChartDraft from "../components/PieChart.vue"
 
-import PDFDocument from "pdfkit"
+
 
 export default {
     name: `Playground`,
 
+    components: {
+        ChartDraft
+    },
 
 
 
@@ -17,11 +21,13 @@ export default {
 
 <template>
 
+    
     <div class="container mt-5">
-        <h1>playgound</h1>
+        <!-- <h1>playgound</h1> -->
+        <ChartDraft />
     </div>
-
-    <button @click="downloadPDF()" class="btn"> Try Me</button>
+    
+    
 
 
 </template>
