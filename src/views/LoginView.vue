@@ -53,7 +53,7 @@ export default {
 
             </form>
             <div class="container mt-5">
-                <a href="">Don't have an account?</a>
+                <a @click.prevent="this.$router.push(`/register`)" href="">Don't have an account?</a>
             </div><br><br>
 
 

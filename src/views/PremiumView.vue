@@ -30,8 +30,14 @@ export default {
 
         <Chart />
 
+        <!-- Kalo udah deploy nanti tinggal diganti -->
+        <form method="get" action="http://localhost:3000/reports?username=lanny&id=123">
+            <button type="submit">Download!</button>
+        </form>
 
-        <button @click.prevent="getPDF">Get PDF</button>
+        <button @click.prevent="getPDF">
+            ambil PDF
+        </button>
 
     </div>
 
