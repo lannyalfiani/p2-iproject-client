@@ -38,8 +38,9 @@ export default {
 
 
     <!-- TABEL -->
+    <hr>
     <div class="expense-table">
-      <div class="mt-5">
+      <div class="">
         <div class="col-12 table-responsive">
           <table class="table bg-light">
             <thead>
