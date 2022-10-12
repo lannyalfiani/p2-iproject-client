@@ -1,6 +1,19 @@
 <script>
+import ChartDraft from "../components/PieChart.vue"
+
+
+
 export default {
     name: `Playground`,
+
+    components: {
+        ChartDraft
+    },
+
+
+
+
+
 }
 
 </script>
@@ -8,13 +21,13 @@ export default {
 
 <template>
 
+    
     <div class="container mt-5">
-        <h1>playgound</h1>
+        <!-- <h1>playgound</h1> -->
+        <ChartDraft />
     </div>
-
-    <button>
-        Try Me
-    </button>
+    
+    
 
 
 </template>
