@@ -1,6 +1,5 @@
-import { defineStore } from 'pinia'
 import axios from "axios"
-// import download from "downloadjs"
+import { defineStore } from 'pinia'
 
 let baseURL = "http://localhost:3000/"
 
@@ -32,8 +31,6 @@ export const useIndexStore = defineStore('index', {
                         password: payload.password
                     }
                 })
-                // console.log(data);
-
                 let access_token = data.access_token
                 let username = data.userData.username
                 let status = data.userData.status
@@ -108,9 +105,9 @@ export const useIndexStore = defineStore('index', {
         },
 
         async addExpense(payload) {
-            console.log(payload);
+            // console.log(payload);
             try {
-                let { data } = await axios({
+                await axios({
                     method: `POST`,
                     url: baseURL + `expenses`,
                     headers: {
@@ -121,6 +118,23 @@ export const useIndexStore = defineStore('index', {
                         amount: payload.amount,
                         date: payload.date,
                         CategoryId: payload.CategoryId,
+                    }
+                })
+                // console.log(data);
+                this.fetchExpenses()
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+        async deleteExpense(id) {
+            console.log(id);
+            try {
+                await axios({
+                    method: `DELETE`,
+                    url: baseURL + `expenses/${id}`,
+                    headers: {
+                        access_token: localStorage.getItem(`access_token`)
                     }
                 })
                 // console.log(data);
@@ -162,10 +176,12 @@ export const useIndexStore = defineStore('index', {
         // },
 
         // async editExpense(id, payload) {
+        //     console.log(id);
+        //     console.log(payload);
         //     try {
         //         await axios({
         //             method: `PATCH`,
-        //             url: baseURL + ``,
+        //             url: baseURL + `expenses${id}`,
         //             headers: {
         //                 access_token: localStorage.getItem(`access_token`)
         //             },
@@ -175,6 +191,7 @@ export const useIndexStore = defineStore('index', {
         //                 date: payload.date,
         //             }
         //         })
+        //         this.fetchExpenses()
         //     } catch (err) {
         //         console.log(err);
         //     }

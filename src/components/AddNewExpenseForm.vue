@@ -38,7 +38,9 @@ export default {
 
 
 <template>
+
     <div class="bg-light" id="Add-New-Expense">
+     
         <div class="container mt-3">
             <h3 class="mb-5 border-1">Add new expense</h3>
 
@@ -47,14 +49,14 @@ export default {
                 <div class="col-3 mb-2">
                     <label for="expense-name">Expense Name</label>
                     <input v-model="dataInput.name" type="text" class="form-control" id="expense-name"
-                        placeholder="Groceries">
+                        placeholder="Arisan">
                 </div>
 
 
                 <div class="col-3 mb-2">
                     <label for="expense-amount">Amount</label>
                     <input v-model="dataInput.amount" type="number" class="form-control" id="expense-amount"
-                        placeholder="50,000">
+                        placeholder="50000">
                 </div>
 
                 <div class="col-3 mb-2">
