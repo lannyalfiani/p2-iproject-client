@@ -14,18 +14,27 @@ export default {
   data() {
     return {
       username: localStorage.getItem(`username`),
-      membership: localStorage.getItem(`status`),
+      // membership: localStorage.getItem(`status`),
       show: false
     }
   },
 
+  computed: {
+    ...mapState(useIndexStore, [`isPremium`])
+  },
+
   methods: {
-    ...mapActions(useIndexStore, [`payments`, `getPDF`]),
+    ...mapActions(useIndexStore, [`payments`, `getPDF`, `checkPremium`]),
 
     showForm() {
       this.show = true
     }
   },
+
+  created() {
+    this.checkPremium()
+  }
+  
 }
 
 </script>
@@ -51,16 +60,16 @@ export default {
 
 
         <!-- Premium card -->
-        <div v-if="membership==='regular'" class="card col-6 text-center p-5">
+        <div v-if="!isPremium" class="card col-6 text-center p-5">
           <span>
             Tired of the boring table?
           </span>
           <a @click.prevent="payments" id="pay-button" class="m-lg-4">Go premium</a>
         </div>
 
-        <div v-if="membership==='premium'" class="card col-6 text-center p-5">
+        <div v-if="isPremium" class="card col-6 text-center p-5">
           <span>
-            Membership: <span style="color:red;">{{membership}}</span>
+            Membership: <span style="color:red;">Premium</span>
           </span>
           <form class="mt-5" method="get" action="http://localhost:3000/reports?username=lanny&id=123">
             <button class="btn btn-primary" type="submit">Download Invoice</button>
