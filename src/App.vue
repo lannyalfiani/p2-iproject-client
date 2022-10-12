@@ -1,6 +1,5 @@
 <script>
 import Navbar from "./components/Navbar.vue"
-
 export default {
   name: `App`,
 
@@ -13,7 +12,7 @@ export default {
 
 <template>
 
-  <!-- <h1>Ya</h1> -->
+
   <Navbar />
 
   <RouterView />

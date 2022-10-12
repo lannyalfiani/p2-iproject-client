@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from "axios"
-// import { Bar } from 'vue-chartjs'
+// import download from "downloadjs"
 
 let baseURL = "http://localhost:3000/"
 
@@ -48,6 +48,12 @@ export const useIndexStore = defineStore('index', {
             } catch (err) {
                 console.log(err);
             }
+        },
+
+        logout() {
+            localStorage.clear()
+            this.isLoggedIn = false
+            this.router.push(`/login`)
         },
 
         async register(payload) {
@@ -124,35 +130,36 @@ export const useIndexStore = defineStore('index', {
             }
         },
 
-        async sendSMS() {
-            try {
-                // let { data } = await axios({
-                //     method: `POST`,
-                //     url: `https://rest.messagebird.com/messages`,
-                //     headers: {
-                //         Authorization: `AccessKey 9PZcBfwv9u0oo6jnmnigHyi6Z`
-                //     }
-                // })
-                var messagebird = require('messagebird')('9PZcBfwv9u0oo6jnmnigHyi6Z');
+        //? blm bisa pake 3rd party API
+        // async sendSMS() {
+        //     try {
+        //         // let { data } = await axios({
+        //         //     method: `POST`,
+        //         //     url: `https://rest.messagebird.com/messages`,
+        //         //     headers: {
+        //         //         Authorization: `AccessKey 9PZcBfwv9u0oo6jnmnigHyi6Z`
+        //         //     }
+        //         // })
+        //         // var messagebird = require('messagebird')('9PZcBfwv9u0oo6jnmnigHyi6Z');
 
-                var params = {
-                    'originator': 'MessageBird',
-                    'recipients': [
-                        '085161750033'
-                    ],
-                    'body': 'This is a test message.'
-                };
+        //         // var params = {
+        //         //     'originator': 'MessageBird',
+        //         //     'recipients': [
+        //         //         '085161750033'
+        //         //     ],
+        //         //     'body': 'This is a test message.'
+        //         // };
 
-                messagebird.messages.create(params, function (err, response) {
-                    if (err) {
-                        return console.log(err);
-                    }
-                    console.log(response);
-                });
-            } catch (err) {
-                console.log(err);
-            }
-        },
+        //         // messagebird.messages.create(params, function (err, response) {
+        //         //     if (err) {
+        //         //         return console.log(err);
+        //         //     }
+        //         //     console.log(response);
+        //         // });
+        //     } catch (err) {
+        //         console.log(err);
+        //     }
+        // },
 
         // async editExpense(id, payload) {
         //     try {
@@ -211,22 +218,24 @@ export const useIndexStore = defineStore('index', {
             }
         },
 
+        // Cuma bisa dibikin general
         async getPDF() {
             try {
-                let { data } = await axios({
+                let response = await axios({
                     method: `GET`,
-                    url: baseURL + `reports`,
-                    headers: {
-                        access_token: localStorage.getItem(`access_token`)
-                    }
+                    url: baseURL + `reports?username=lanny&id=123`,
+                    // headers: {
+                    //     access_token: localStorage.getItem(`access_token`)
+                    // }
                 })
-                this.PDF = data
-                console.log(data);
+                this.PDF = response.data
+                // console.log(response.pipe);
             } catch (err) {
                 console.log(err);
             }
         },
 
+        // Pindahin ke server krn kena cors
         async fetchSectors() {
             try {
                 let { data } = await axios({
