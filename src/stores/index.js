@@ -11,7 +11,7 @@ export const useIndexStore = defineStore('index', {
             categories: [],
             paymentResponse: {},
             PDF: {},
-            sectors: []
+            news: [],
         }
     },
 
@@ -20,6 +20,18 @@ export const useIndexStore = defineStore('index', {
     // },
 
     actions: {
+
+        async fetchNews() {
+            try {
+                const { data } = await axios({
+                    method: `GET`,
+                    url: baseURL + `news`
+                })
+                this.news = data.posts
+            } catch (err) {
+                console.log(err);
+            }
+        },
 
         async login(payload) {
             try {

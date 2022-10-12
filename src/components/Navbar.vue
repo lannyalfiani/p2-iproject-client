@@ -32,7 +32,7 @@ export default {
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
                 <div class="navbar-brand">
-                        <img src="../assets/logo3.png" height="50" alt="">
+                    <img src="../assets/logo3.png" height="50" alt="">
                 </div>
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarText">
@@ -42,13 +42,16 @@ export default {
                                 href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a @click.prevent="this.$router.push(`/premium`)" class="nav-link" href="#">Premium Area</a>
+                            <a @click.prevent="this.$router.push(`/premium`)" class="nav-link" href="#">Premium</a>
                         </li>
                         <li v-if="isLoggedIn" class="nav-item">
                             <a class="nav-link" href="#">Login</a>
                         </li>
                         <li v-if="isLoggedIn" class="nav-item">
                             <a class="nav-link" href="#">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a @click.prevent="this.$router.push(`/extras`)" class="nav-link" href="#">Extras</a>
                         </li>
                         <li class="nav-item">
                             <a @click.prevent="logout" class="nav-link" href="#">Logout</a>

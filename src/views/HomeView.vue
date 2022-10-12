@@ -23,15 +23,30 @@ export default {
 <template>
 
   <div class="container">
-    <h4 class="h3 mb-3 display-1 mt-5 text-center">Welcome to XPense</h4>
+    <h4 class="display-5 mt-5 mb-5 text-center">Welcome to XPense Tracker</h4>
+    <hr>
+
+
 
     <!-- Nanti pindahin ke Premium aja langsung -->
-    <button @click.prevent="this.payments()" id="pay-button" class="btn btn-primary">Buy Premium account</button>
+    <!-- <button @click.prevent="this.payments()" id="pay-button" class="btn btn-primary">Buy Premium account</button> -->
 
 
 
     <AddNewExpense />
     <hr>
+    <div class="text-center">
+      <!-- <p>Tired of this boring table?</p> -->
+
+      <div class="card">
+        <div class="card-body">
+          <span class="mr-5">
+            Tired of this boring table?
+          </span>
+          <button @click.prevent="this.payments()" id="pay-button" class="btn btn-primary m-5">Go Premium</button>
+        </div>
+      </div>
+    </div>
     <ExpenseTable />
 
 
