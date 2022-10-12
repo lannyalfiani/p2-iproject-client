@@ -12,6 +12,7 @@ export const useIndexStore = defineStore('index', {
             paymentResponse: {},
             PDF: {},
             news: [],
+            isPremium: false
         }
     },
 
@@ -53,6 +54,16 @@ export const useIndexStore = defineStore('index', {
                 localStorage.setItem("status", status);
                 localStorage.setItem("userId", userId);
                 this.isLoggedIn = true
+                // this.isPremium = status
+
+                if (status === `regular`) {
+                    this.isPremium = false
+                } else if (status === `premium`) {
+                    this.isPremium = true
+                }
+
+
+
                 this.router.push('/')
             } catch (err) {
                 console.log(err);
@@ -63,6 +74,22 @@ export const useIndexStore = defineStore('index', {
             localStorage.clear()
             this.isLoggedIn = false
             this.router.push(`/login`)
+        },
+
+        checkLogin() {
+            if (localStorage.access_token) {
+                this.isLoggedIn = true
+            } else {
+                this.isLoggedIn = false
+            }
+        },
+
+        checkPremium() {
+            if (localStorage.status === `premium`) {
+                this.isPremium = true
+            } else if (localStorage.status === `regular`) {
+                this.isPremium = false
+            }
         },
 
         async register(payload) {
@@ -117,7 +144,7 @@ export const useIndexStore = defineStore('index', {
         },
 
         async addExpense(payload) {
-            // console.log(payload);
+            console.log(payload);
             try {
                 await axios({
                     method: `POST`,
@@ -132,7 +159,6 @@ export const useIndexStore = defineStore('index', {
                         CategoryId: payload.CategoryId,
                     }
                 })
-                // console.log(data);
                 this.fetchExpenses()
             } catch (err) {
                 console.log(err);

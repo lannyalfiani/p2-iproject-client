@@ -7,19 +7,24 @@ import { useIndexStore } from '../stores';
 export default {
     name: `Navbar`,
 
-    data() {
-        return {
-            status: localStorage.getItem(`status`)
-        }
-    },
+    // data() {
+    //     return {
+    //         membership: localStorage.getItem(`status`),
+    //     }
+    // },
 
 
     computed: {
-        ...mapState(useIndexStore, [`isLoggedIn`])
+        ...mapState(useIndexStore, [`isLoggedIn`, `isPremium`])
     },
 
     methods: {
-        ...mapActions(useIndexStore, [`logout`])
+        ...mapActions(useIndexStore, [`logout`, `checkLogin`, `checkPremium`])
+    },
+
+    created() {
+        this.checkLogin()
+        this.checkPremium()
     }
 }
 
@@ -35,19 +40,19 @@ export default {
                     <img src="../assets/logo3.png" height="50" alt="">
                 </div>
 
-                <div class="collapse navbar-collapse justify-content-end" id="navbarText">
+                <div v-if="isLoggedIn" class="collapse navbar-collapse justify-content-end" id="navbarText">
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a @click.prevent="this.$router.push(`/`)" class="nav-link" aria-current="page"
                                 href="#">Home</a>
                         </li>
-                        <li class="nav-item">
+                        <li v-if="isPremium" class="nav-item">
                             <a @click.prevent="this.$router.push(`/premium`)" class="nav-link" href="#">Premium</a>
                         </li>
-                        <li v-if="isLoggedIn" class="nav-item">
+                        <li v-if="!isLoggedIn" class="nav-item">
                             <a class="nav-link" href="#">Login</a>
                         </li>
-                        <li v-if="isLoggedIn" class="nav-item">
+                        <li v-if="!isLoggedIn" class="nav-item">
                             <a class="nav-link" href="#">Register</a>
                         </li>
                         <li class="nav-item">
