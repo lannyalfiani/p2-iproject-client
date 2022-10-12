@@ -1,5 +1,7 @@
 import axios from "axios"
 import { defineStore } from 'pinia'
+import Swal from "sweetalert2"
+
 
 let baseURL = "http://localhost:3000/"
 
@@ -12,7 +14,8 @@ export const useIndexStore = defineStore('index', {
             paymentResponse: {},
             PDF: {},
             news: [],
-            isPremium: false
+            isPremium: false,
+            userId: ""
         }
     },
 
@@ -53,8 +56,11 @@ export const useIndexStore = defineStore('index', {
                 localStorage.setItem("username", username);
                 localStorage.setItem("status", status);
                 localStorage.setItem("userId", userId);
+
+                Swal.fire('Welcome to XPense!')
+
                 this.isLoggedIn = true
-                // this.isPremium = status
+                this.userId = data.userData.id
 
                 if (status === `regular`) {
                     this.isPremium = false
@@ -62,9 +68,71 @@ export const useIndexStore = defineStore('index', {
                     this.isPremium = true
                 }
 
-
-
+                // console.log(this.userId); // dapet
                 this.router.push('/')
+
+            } catch (err) {
+                // console.log(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${err.response.data.message}`,
+                })
+            }
+        },
+
+        async payments() {
+            try {
+
+                //! HIT initiate payment
+                let { data } = await axios({
+                    method: `POST`,
+                    url: baseURL + `payments`,
+                    headers: {
+                        access_token: localStorage.getItem(`access_token`)
+                    }
+                })
+                // console.log(data);
+
+                let UserId = localStorage.getItem(`userId`)
+
+                //! Hit midtrans foor payment
+                snap.pay(`${data.transactionToken}`, {
+                    onSuccess: async function (result) {
+                        // console.log(result); //! result dari midtrans
+                        this.paymentResponse = result
+
+                        //TODO axios lagi ke server untuk ubah column status jadi premium + add trx data
+                        await axios({
+                            method: `PATCH`,
+                            // url: baseURL + `premium/${id}` //? harus dapetin userId
+                            url: baseURL + `premium/${UserId}`, //? harus dapetin userId,
+                            headers: {
+                                access_token: localStorage.getItem(`access_token`)
+                            }
+                        })
+                        localStorage.setItem("status", `premium`);
+                        this.isPremium = true //TODO blm nyangkut jadi blm reaktif
+                        this.checkLogin()
+                        // this.checkPremium()
+                        // console.log(data); //! tadi udh bisa ke hit, tinggal panggil endpoint yg change status
+                    },
+
+                    //? Opsional dipake
+                    onPending: function (result) { console.log('pending'); console.log(result); },
+                    onError: function (result) { console.log('error'); console.log(result); },
+                    onClose: function () {
+                        console.log('customer closed the popup without finishing the payment');
+                    }
+                })
+                // console.log(`udah bayar`);
+                // localStorage.setItem("status", `premium`);
+                // this.isPremium = true
+                // this.checkLogin()
+                // console.log(`premium keubah`);
+                // this.checkPremium()
+
+
             } catch (err) {
                 console.log(err);
             }
@@ -104,9 +172,15 @@ export const useIndexStore = defineStore('index', {
                     }
                 })
                 // console.log(data);
+                Swal.fire('Registered successfully, please log in to proceed!')
                 this.router.push('/login')
             } catch (err) {
-                console.log(err);
+                // console.log(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${err.response.data.message}`,
+                })
             }
         },
 
@@ -123,7 +197,12 @@ export const useIndexStore = defineStore('index', {
                 // console.log(data);
             } catch (err) {
                 // console.log(err);
-                console.log(err);
+                // console.log(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${err.message}`,
+                })
             }
         },
 
@@ -139,12 +218,16 @@ export const useIndexStore = defineStore('index', {
                 this.categories = data
                 // console.log(data);
             } catch (err) {
-                console.log(err);
+                // console.log(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${err.message}`,
+                })
             }
         },
 
         async addExpense(payload) {
-            console.log(payload);
             try {
                 await axios({
                     method: `POST`,
@@ -162,6 +245,11 @@ export const useIndexStore = defineStore('index', {
                 this.fetchExpenses()
             } catch (err) {
                 console.log(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${err.message}`,
+                })
             }
         },
 
@@ -179,99 +267,16 @@ export const useIndexStore = defineStore('index', {
                 this.fetchExpenses()
             } catch (err) {
                 console.log(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${err.response.data.message}`,
+                })
             }
         },
 
-        //? blm bisa pake 3rd party API
-        // async sendSMS() {
-        //     try {
-        //         // let { data } = await axios({
-        //         //     method: `POST`,
-        //         //     url: `https://rest.messagebird.com/messages`,
-        //         //     headers: {
-        //         //         Authorization: `AccessKey 9PZcBfwv9u0oo6jnmnigHyi6Z`
-        //         //     }
-        //         // })
-        //         // var messagebird = require('messagebird')('9PZcBfwv9u0oo6jnmnigHyi6Z');
 
-        //         // var params = {
-        //         //     'originator': 'MessageBird',
-        //         //     'recipients': [
-        //         //         '085161750033'
-        //         //     ],
-        //         //     'body': 'This is a test message.'
-        //         // };
 
-        //         // messagebird.messages.create(params, function (err, response) {
-        //         //     if (err) {
-        //         //         return console.log(err);
-        //         //     }
-        //         //     console.log(response);
-        //         // });
-        //     } catch (err) {
-        //         console.log(err);
-        //     }
-        // },
-
-        // async editExpense(id, payload) {
-        //     console.log(id);
-        //     console.log(payload);
-        //     try {
-        //         await axios({
-        //             method: `PATCH`,
-        //             url: baseURL + `expenses${id}`,
-        //             headers: {
-        //                 access_token: localStorage.getItem(`access_token`)
-        //             },
-        //             data: {
-        //                 name: payload.name,
-        //                 amount: payload.amount,
-        //                 date: payload.date,
-        //             }
-        //         })
-        //         this.fetchExpenses()
-        //     } catch (err) {
-        //         console.log(err);
-        //     }
-        // },
-
-        async payments() {
-            try {
-                let { data } = await axios({
-                    method: `POST`,
-                    url: baseURL + `payments`,
-                    headers: {
-                        access_token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ1c2VyIiwiZW1haWwiOiJ1c2VyQGdtYWlsLmNvbSIsInN0YXR1cyI6InJlZ3VsYXIiLCJpYXQiOjE2NjU0OTU5OTZ9.HjH-UIwTVesUeY-3IbXPDjKnAL0M5fB4Y4wIoz2ddz4`
-                    }
-                })
-                // console.log(data);
-
-                snap.pay(`${data.transactionToken}`, {
-                    onSuccess: async function (result) {
-                        console.log(result); //! result dari midtrans
-                        this.paymentResponse = result
-
-                        //TODO axios lagi ke server untuk ubah column status jadi premium + add trx data
-                        let { data } = await axios({
-                            method: `PATCH`,
-                            // url: baseURL + `premium/${id}` //? harus dapetin userId
-                            url: baseURL + `premium/1`, //? harus dapetin userId,
-                            headers: {
-                                access_token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ1c2VyIiwiZW1haWwiOiJ1c2VyQGdtYWlsLmNvbSIsInN0YXR1cyI6InJlZ3VsYXIiLCJpYXQiOjE2NjU0OTU5OTZ9.HjH-UIwTVesUeY-3IbXPDjKnAL0M5fB4Y4wIoz2ddz4`
-                            }
-                        })
-                        console.log(data); //! tadi udh bisa ke hit, tinggal panggil endpoint yg change status
-                    },
-
-                    //? Opsional dipake
-                    onPending: function (result) { console.log('pending'); console.log(result); },
-                    onError: function (result) { console.log('error'); console.log(result); },
-                    onClose: function () { console.log('customer closed the popup without finishing the payment'); }
-                })
-            } catch (err) {
-                console.log(err);
-            }
-        },
 
         // Cuma bisa dibikin general
         async getPDF() {
@@ -289,6 +294,11 @@ export const useIndexStore = defineStore('index', {
                 // console.log(response.pipe);
             } catch (err) {
                 console.log(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${err.message}`,
+                })
             }
         },
 
