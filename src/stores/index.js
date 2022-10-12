@@ -223,7 +223,9 @@ export const useIndexStore = defineStore('index', {
             try {
                 let response = await axios({
                     method: `GET`,
-                    url: baseURL + `reports?username=lanny&id=123`,
+                    url: baseURL + `reports`,
+
+                    // gajadi pake token
                     // headers: {
                     //     access_token: localStorage.getItem(`access_token`)
                     // }

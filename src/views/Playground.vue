@@ -1,6 +1,15 @@
 <script>
+
+import PDFDocument from "pdfkit"
+
 export default {
     name: `Playground`,
+
+
+
+
+
+
 }
 
 </script>
@@ -12,9 +21,7 @@ export default {
         <h1>playgound</h1>
     </div>
 
-    <button>
-        Try Me
-    </button>
+    <button @click="downloadPDF()" class="btn"> Try Me</button>
 
 
 </template>
