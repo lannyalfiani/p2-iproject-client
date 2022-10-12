@@ -26,11 +26,17 @@ export default {
 
         handleAddExpense() {
             this.addExpense(this.dataInput)
+        },
+
+        emptyForm() {
+            this.dataInput = {}
         }
     },
 
     created() {
-        this.fetchCategories()
+        this.fetchCategories(),
+
+            this.emptyForm()
     }
 }
 
@@ -40,7 +46,7 @@ export default {
 <template>
 
     <div class="bg-light" id="Add-New-Expense">
-     
+
         <div class="container mt-3">
             <h3 class="mb-5 border-1">Add new expense</h3>
 

@@ -3,7 +3,8 @@ import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue"
 import RegisterView from "../views/RegisterView.vue"
 import Premium from "../views/PremiumView.vue"
-import Sectors from "../views/Sectors.vue"
+// import Sectors from "../views/Sectors.vue"
+import Extras from "../views/Extras.vue"
 
 import Playground from "../views/Playground.vue"
 
@@ -31,23 +32,15 @@ const router = createRouter({
       component: Premium,
     },
     {
-      path: "/sectors",
-      name: "sectors",
-      component: Sectors,
+      path: "/extras",
+      name: "extras",
+      component: Extras,
     },
     {
       path: "/playground",
       name: "playground",
       component: Playground,
-    },
-    // {
-    //   path: "/about",
-    //   name: "about",
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import("../views/AboutView.vue"),
-    // },
+    }
   ],
 });
 
