@@ -34,7 +34,7 @@ export default {
   created() {
     this.checkPremium()
   }
-  
+
 }
 
 </script>
@@ -52,9 +52,12 @@ export default {
           <span>
             Hello, {{username}}!
           </span>
-          <!-- <span class="mt-4">
-            Membership: <span style="color:red;">{{membership}}</span>
-          </span> -->
+          <span v-if="isPremium" class="mt-4">
+            Membership: <span style="color:red;">Premium</span>
+          </span>
+          <span v-if="!isPremium" class="mt-4">
+            Membership: <span>Regular</span>
+          </span>
         </div>
 
 
