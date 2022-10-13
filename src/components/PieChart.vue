@@ -39,7 +39,7 @@ export default {
             data: {
                 labels: this.forPieChart.labels,
                 datasets: [{
-                    label: '# of Votes',
+                    label: 'Total expense per category',
                     data: data,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
