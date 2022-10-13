@@ -69,7 +69,7 @@ export default {
           <span>
             Tired of the boring table?
           </span>
-          <a @click.prevent="payments" id="pay-button" class="m-lg-4">Go premium</a>
+          <a style="hover:background-color:blue; cursor: pointer" @click.prevent="payments" id="pay-button" class="m-lg-4">Go premium</a>
         </div>
 
         <div v-if="isPremium" class="card col-6 text-center p-5">
