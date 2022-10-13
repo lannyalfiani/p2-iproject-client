@@ -3,14 +3,14 @@ import { mapActions, mapState } from 'pinia';
 import { useIndexStore } from '../stores/index';
 import AddNewExpense from "../components/AddNewExpenseForm.vue"
 import ExpenseTable from "../components/ExpenseTable.vue"
-import EditExpense from "../components/EditExpense.vue"
+// import EditExpense from "../components/EditExpense.vue"
 
 export default {
   name: `Home`,
   components: {
     AddNewExpense,
     ExpenseTable,
-    EditExpense
+    // EditExpense
   },
 
   data() {
