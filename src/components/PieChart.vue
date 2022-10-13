@@ -5,31 +5,20 @@ import { useIndexStore } from '../stores';
 export default {
     name: `ChartDraft`,
 
-    // data() {
-    //     return {
-    //         chartValue : []
-    //     }
-    // },
-
     computed: {
         ...mapState(useIndexStore, [`forPieChart`])
     },
 
     methods: {
         ...mapActions(useIndexStore, [`showPie`]),
-
-        // handleChartValue() {
-        //     this.forPieChart
-        // }
     },
 
-    created() {
+    // created() {
 
-    },
+    // },
 
     async mounted() {
         await this.showPie()
-        // console.log(this.forPieChart.data);
 
         let data = this.forPieChart.data
 
