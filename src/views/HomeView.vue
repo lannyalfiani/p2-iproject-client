@@ -3,12 +3,14 @@ import { mapActions, mapState } from 'pinia';
 import { useIndexStore } from '../stores/index';
 import AddNewExpense from "../components/AddNewExpenseForm.vue"
 import ExpenseTable from "../components/ExpenseTable.vue"
+import EditExpense from "../components/EditExpense.vue"
 
 export default {
   name: `Home`,
   components: {
     AddNewExpense,
-    ExpenseTable
+    ExpenseTable,
+    EditExpense
   },
 
   data() {
@@ -81,16 +83,9 @@ export default {
 
 
       </div>
-
-
-      <!-- <div class="row">
-        <div class="col-3">
-          <a @click.prevent="showForm" class="btn btn-primary d-flex flex-row">Add new Expense</a>
-        </div>
-      </div> -->
-
-      <!-- v-if="show" -->
       <AddNewExpense class="mt-5" />
+
+      <!-- <EditExpense /> -->
       <hr>
     </div>
 

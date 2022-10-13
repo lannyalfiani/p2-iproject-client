@@ -244,7 +244,7 @@ export const useIndexStore = defineStore('index', {
                 })
                 this.fetchExpenses()
             } catch (err) {
-                console.log(err);
+                // console.log(err);
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -266,7 +266,7 @@ export const useIndexStore = defineStore('index', {
                 // console.log(data);
                 this.fetchExpenses()
             } catch (err) {
-                console.log(err);
+                // console.log(err);
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -290,7 +290,7 @@ export const useIndexStore = defineStore('index', {
                 this.PDF = response.data
                 // console.log(response.pipe);
             } catch (err) {
-                console.log(err);
+                // console.log(err);
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -308,7 +308,12 @@ export const useIndexStore = defineStore('index', {
                 })
                 this.sectors = data.data
             } catch (err) {
-                console.log(err);
+                // console.log(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${err.message}`,
+                })
             }
         },
 
@@ -326,7 +331,38 @@ export const useIndexStore = defineStore('index', {
                 this.fetchExpenses()
                 this.fetchCategories()
             } catch (err) {
+                // console.log(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${err.message}`,
+                })
+            }
+        },
+
+        async editExpense(id, payload) {
+            try {
+                let { data } = await axios({
+                    method: `PATCH`,
+                    url: baseURL + `expenses/${id}`,
+                    headers: {
+                        access_token: localStorage.getItem(`access_token`)
+                    },
+                    data: {
+                        name: payload.name,
+                        amount: payload.amount,
+                        date: payload.date,
+                    }
+                    // http://localhost:3000/expenses/20
+                })
+                // console.log(data);
+            } catch (err) {
                 console.log(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${err.message}`,
+                })
             }
         }
 

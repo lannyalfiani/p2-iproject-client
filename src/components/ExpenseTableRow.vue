@@ -21,12 +21,12 @@ export default {
                 year: "numeric",
                 month: "short",
                 day: "numeric",
-                weekday: 'long' 
+                weekday: 'long'
                 // hour: "2-digit",
                 // minute: "2-digit",
                 // second: "2-digit",
-        // let option = { weekday: 'long' , year: 'numeric' , month: 'long' , day: 'numeric' }
-                
+                // let option = { weekday: 'long' , year: 'numeric' , month: 'long' , day: 'numeric' }
+
             })
         }
 
@@ -56,7 +56,9 @@ export default {
 
         <td>{{expense.Category.name}}</td>
         <td>
-            <a @click.prevent="deleteExpense(expense.id)" href="">Delete</a>
+            <a class="mr-2" @click.prevent="deleteExpense(expense.id)" href="">Delete</a>
+            <!-- <a class="ml-2" href="">Edit</a> -->
+            <!-- <button class="ml-2">Edit</button> -->
         </td>
     </tr>
 
