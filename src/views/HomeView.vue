@@ -53,7 +53,7 @@ export default {
             Hello, {{username}}!
           </span>
           <span v-if="isPremium" class="mt-4">
-            Membership: <span style="color:red;">Premium</span>
+            You are priviledged for a pretty chart
           </span>
           <span v-if="!isPremium" class="mt-4">
             Membership: <span>Regular</span>

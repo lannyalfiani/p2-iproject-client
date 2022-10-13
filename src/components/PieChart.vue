@@ -1,17 +1,43 @@
 <script>
+import { mapActions, mapState } from 'pinia';
+import { useIndexStore } from '../stores';
 
 export default {
     name: `ChartDraft`,
 
-    mounted() {
+    // data() {
+    //     return {
+    //         chartValue : []
+    //     }
+    // },
 
-        let data = [520000, 550000, 1110000, 165444]
+    computed: {
+        ...mapState(useIndexStore, [`forPieChart`])
+    },
+
+    methods: {
+        ...mapActions(useIndexStore, [`showPie`]),
+
+        // handleChartValue() {
+        //     this.forPieChart
+        // }
+    },
+
+    created() {
+
+    },
+
+    async mounted() {
+        await this.showPie()
+        // console.log(this.forPieChart.data);
+
+        let data = this.forPieChart.data
 
         const ctx = document.getElementById('myChart').getContext('2d');
         const myChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ['Groceries', 'Food delivery', 'Bills', 'Transportation'],
+                labels: this.forPieChart.labels,
                 datasets: [{
                     label: '# of Votes',
                     data: data,
@@ -49,6 +75,7 @@ export default {
 
 
 <template>
+    <!-- <pre>{{forPieChart}}</pre> -->
 
     <div class="container border-1 bg-light mt-5 text-center">
         <h4 class="text-center">Expense per category</h4>

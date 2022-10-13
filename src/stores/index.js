@@ -15,7 +15,8 @@ export const useIndexStore = defineStore('index', {
             PDF: {},
             news: [],
             isPremium: false,
-            userId: ""
+            userId: "",
+            forPieChart: {}
         }
     },
 
@@ -112,10 +113,9 @@ export const useIndexStore = defineStore('index', {
                             }
                         })
                         localStorage.setItem("status", `premium`);
-                        this.isPremium = true //TODO blm jalan jadi blm reaktif
+                        this.isPremium = true
                         this.checkLogin()
-                        // this.checkPremium()
-                        console.log(data); //! tadi udh bisa ke hit, tinggal panggil endpoint yg change status
+                        // console.log(data); //! tadi udh bisa ke hit, tinggal panggil endpoint yg change status
                     },
 
                     //? Opsional dipake
@@ -275,9 +275,6 @@ export const useIndexStore = defineStore('index', {
             }
         },
 
-
-
-
         // Cuma bisa dibikin general
         async getPDF() {
             try {
@@ -310,6 +307,24 @@ export const useIndexStore = defineStore('index', {
                     url: `https://indonesia-stock-exchange.vercel.app/api/sectors`
                 })
                 this.sectors = data.data
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+        async showPie() {
+            try {
+                let { data } = await axios({
+                    method: `GET`,
+                    url: baseURL + `expenses/pie`,
+                    headers: {
+                        access_token: localStorage.getItem(`access_token`)
+                    }
+                })
+                this.forPieChart = data
+                // console.log(data);
+                this.fetchExpenses()
+                this.fetchCategories()
             } catch (err) {
                 console.log(err);
             }
