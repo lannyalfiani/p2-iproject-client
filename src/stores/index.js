@@ -96,9 +96,9 @@ export const useIndexStore = defineStore('index', {
 
                 let UserId = localStorage.getItem(`userId`)
 
-                //! Hit midtrans foor payment
+                //! Hit midtrans for payment
                 snap.pay(`${data.transactionToken}`, {
-                    onSuccess: async function (result) {
+                    onSuccess: async (result) => {
                         // console.log(result); //! result dari midtrans
                         this.paymentResponse = result
 
@@ -112,10 +112,10 @@ export const useIndexStore = defineStore('index', {
                             }
                         })
                         localStorage.setItem("status", `premium`);
-                        this.isPremium = true //TODO blm nyangkut jadi blm reaktif
+                        this.isPremium = true //TODO blm jalan jadi blm reaktif
                         this.checkLogin()
                         // this.checkPremium()
-                        // console.log(data); //! tadi udh bisa ke hit, tinggal panggil endpoint yg change status
+                        console.log(data); //! tadi udh bisa ke hit, tinggal panggil endpoint yg change status
                     },
 
                     //? Opsional dipake
