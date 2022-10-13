@@ -76,7 +76,10 @@ export default {
           <span>
             Membership: <span style="color:red;">Premium</span>
           </span>
-          <form class="mt-5" method="get" action="http://localhost:3000/reports?username=lanny&id=123">
+          <!-- <form class="mt-5" method="get" action="http://localhost:3000/reports?username=lanny&id=123">
+            <button class="btn btn-primary" type="submit">Download Invoice</button>
+          </form> -->
+          <form class="mt-5" method="get" action="https://blooming-sands-84563.herokuapp.com/reports">
             <button class="btn btn-primary" type="submit">Download Invoice</button>
           </form>
         </div>

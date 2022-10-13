@@ -3,7 +3,8 @@ import { defineStore } from 'pinia'
 import Swal from "sweetalert2"
 
 
-let baseURL = "http://localhost:3000/"
+// let baseURL = "http://localhost:3000/"
+let baseURL = "https://blooming-sands-84563.herokuapp.com/"
 
 export const useIndexStore = defineStore('index', {
     state: () => {
@@ -254,7 +255,7 @@ export const useIndexStore = defineStore('index', {
         },
 
         async deleteExpense(id) {
-            console.log(id);
+            // console.log(id);
             try {
                 await axios({
                     method: `DELETE`,
