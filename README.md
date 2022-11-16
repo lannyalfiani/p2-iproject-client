@@ -1,35 +1,10 @@
-# .
+# p2-iproject-client (XPense)
 
-This template should help get you started developing with Vue 3 in Vite.
+Individual Project - Client
 
-## Recommended IDE Setup
+An individual project from Hacktiv8 Full Stack Immersive Program in Phase 2. A simple personal financial tracker apps for users to do simple CRUD operations. 
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Tech stack: **Vue**, **Pinia**, **Midtrans API**, **Chart.js**
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+  
+[Deployment link](https://xpense-250e5.web.app/)
